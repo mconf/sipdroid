@@ -163,8 +163,12 @@ public class RtpStreamReceiver extends Thread {
 		setMode(speakermode = mode);
 		setCodec();
 		restoreVolume();
-		if (mode == AudioManager.MODE_NORMAL && Thread.currentThread().getName().equals("main"))
-			Toast.makeText(Receiver.mContext, R.string.help_speakerphone, Toast.LENGTH_LONG).show();
+		/**
+		 * Modified by the Mconf team
+		 * we don't want to show a toast everytime the user enables the loudspeaker
+		 */
+//		if (mode == AudioManager.MODE_NORMAL && Thread.currentThread().getName().equals("main"))
+//			Toast.makeText(Receiver.mContext, R.string.help_speakerphone, Toast.LENGTH_LONG).show();
 		return old;
 	}
 

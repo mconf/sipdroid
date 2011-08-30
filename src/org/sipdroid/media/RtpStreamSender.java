@@ -82,7 +82,11 @@ public class RtpStreamSender extends Thread {
 
 	/** Whether it is running */
 	boolean running = false;
-	boolean muted = false;
+	/**
+	 * Modified by the Mconf team
+	 * the sender begins muted
+	 */
+	boolean muted = true;
 	
 	//DTMF change
 	String dtmf = "";
@@ -303,6 +307,11 @@ public class RtpStreamSender extends Thread {
 		} else {
 			if (frame_size == 960) frame_size = 320;
 			if (frame_size == 1024) frame_size *= 2;
+			/**
+			 * Modified by the Mconf team
+			 * this parameter is to avoid the log message "RecordThread: buffer overflow"
+			 */
+			min *= 2;
 		}
 		frame_rate = p_type.codec.samp_rate()/frame_size;
 		long frame_period = 1000 / frame_rate;
@@ -354,13 +363,29 @@ public class RtpStreamSender extends Thread {
 				if (Receiver.call_state == UserAgent.UA_STATE_HOLD)
 					RtpStreamReceiver.restoreMode();
 				record.stop();
+				/**
+				 * Modified by the Mconf team
+				 * record must be released after stop
+				 */
+				record.release();
+				record = null;
 				while (running && (muted || Receiver.call_state == UserAgent.UA_STATE_HOLD)) {
 					try {
-						sleep(1000);
+						/**
+						 * Modified by the Mconf team
+						 * the sleep time is reduced
+						 */
+						// sleep(1000);
+						sleep(50);
 					} catch (InterruptedException e1) {
 					}
 				}
-				record.startRecording();
+				/**
+				 * Modified by the Mconf team
+				 * instead of start recording here, it will go back to the beginning loop
+				 */
+				// record.startRecording();
+				continue;
 			 }
 			 //DTMF change start
 			 if (dtmf.length() != 0) {

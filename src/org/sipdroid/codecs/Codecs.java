@@ -95,7 +95,7 @@ public class Codecs {
 					 * according to the user */
 					if (c != null) {
 						codecs.remove(c);
-						codecs.add(c);
+						codecs.insertElementAt(c, 0);
 					}
 				} catch (Exception e) {
 					// do nothing (expecting
