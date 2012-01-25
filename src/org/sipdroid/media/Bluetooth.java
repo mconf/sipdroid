@@ -11,6 +11,7 @@ import android.bluetooth.BluetoothClass.Device;
 import android.bluetooth.BluetoothClass.Service;
 import android.content.Context;
 import android.media.AudioManager;
+import android.os.Looper;
 
 /*
  * Copyright (C) 2010 The Sipdroid Open Source Project
@@ -40,6 +41,17 @@ public class Bluetooth {
 	
 	public static void init() {
 		if (ba == null) {
+			
+			//http://code.google.com/p/android/issues/detail?id=16587
+			//
+			//found some similar solutions here:
+			// http://code.google.com/p/android-scripting/source/browse/android/BluetoothFacade/src/com/google/ase/facade/BluetoothFacade.java?r=9407d0bd872fb5375f813fca17c8ef2207b5256b
+			// here:      http://android-wifi-tether.googlecode.com/svn-history/r324/trunk/src/android/tether/TetherApplication.java
+			// and here:  http://stackoverflow.com/questions/6856733/bluetooth-connection-timed-out-too-soon	
+			//all three links call Looper.prepare() before get the bluetooth adapter
+			Looper.prepare();
+			
+			
 			ba = BluetoothAdapter.getDefaultAdapter();
 			am = (AudioManager) Receiver.mContext.getSystemService(
 	                Context.AUDIO_SERVICE);
