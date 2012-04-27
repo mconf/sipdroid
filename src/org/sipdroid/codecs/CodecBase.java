@@ -102,8 +102,11 @@ class CodecBase implements Preference.OnPreferenceChangeListener {
 		nt = tm.getNetworkType();
 		if (wlanOr3GOnly() && nt < TelephonyManager.NETWORK_TYPE_UMTS)
 			return false;
-		if (nt < TelephonyManager.NETWORK_TYPE_EDGE)
-			return false;
+		// \TODO this test is True on Android 3.1 (specifically on Galaxy Tab 
+		// 10.1 3G), which means that the codecs will be classified as invalid, 
+		// which means that the sound won't work at all 
+//		if (nt < TelephonyManager.NETWORK_TYPE_EDGE)
+//			return false;
 		return true;
 	}
 		
