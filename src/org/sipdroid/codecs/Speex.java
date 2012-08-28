@@ -21,7 +21,7 @@ package org.sipdroid.codecs;
 
 import org.sipdroid.sipua.ui.Sipdroid;
 
-class Speex extends CodecBase implements Codec {
+public class Speex extends CodecBase implements Codec {
 
 	/* quality
 	 * 1 : 4kbps (very noticeable artifacts, usually intelligible)
@@ -32,7 +32,7 @@ class Speex extends CodecBase implements Codec {
 	 */
 	private static final int DEFAULT_COMPRESSION = 6;
 
-	Speex() {
+	public Speex() {
 		CODEC_NAME = "speex";
 		CODEC_USER_NAME = "speex";
 		CODEC_DESCRIPTION = "11kbit";

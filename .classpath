@@ -4,5 +4,7 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="lib" path="/flazr/target/flazr/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="/flazr/target/flazr/lib/slf4j-api-1.4.2.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
