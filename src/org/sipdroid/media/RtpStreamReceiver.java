@@ -33,7 +33,6 @@ import org.sipdroid.sipua.ui.InCallScreen;
 import org.sipdroid.sipua.ui.Receiver;
 import org.sipdroid.sipua.ui.Sipdroid;
 import org.sipdroid.codecs.Codecs;
-import org.slf4j.LoggerFactory;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -80,7 +79,6 @@ public class RtpStreamReceiver extends Thread {
 	public static int speakermode = -1;
 	public static boolean bluetoothmode;
 	CallRecorder call_recorder = null;
-	private static final org.slf4j.Logger log = LoggerFactory.getLogger(RtpStreamReceiver.class);
 	
 	/**
 	 * Constructs a RtpStreamReceiver.
@@ -451,7 +449,6 @@ public class RtpStreamReceiver extends Thread {
 	
 	void write(short a[],int b,int c) {
 		synchronized (this) {
-			//log.debug("offset = {} , size = {}",b,c);
 			user += track.write(a,b,c);
 		}
 	}
@@ -607,7 +604,7 @@ public class RtpStreamReceiver extends Thread {
 						 restoreVolume();
 					 }
 					 len = p_type.codec.decode(buffer, lin, rtp_packet.getPayloadLength());
-					 //log.debug("payload = {}",rtp_packet.getPayloadLength());
+					 
 					 // Call recording: Save incoming.
 					 // Data is in buffer lin, from 0 to len.
 					 if (call_recorder != null)
